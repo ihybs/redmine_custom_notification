@@ -6,10 +6,12 @@
   <%= error_messages_for 'foo' %>
 
   <div class="box tabular">
-  <p><%= f.text_field :to_users, :size => 60 %></p>
-  <p><%= f.text_field :cc_users, :size => 60 %></p>
-  <p><%= f.text_field :bcc_users, :size => 60 %></p>
-  <p><%#= f.text_area :body, :cols => 60, :rows => 20, :required => true %></p>
+    <p><%= f.select :selected_notification_template, options_from_collection_for_select(@notification_templates, :id, :name),
+      { :include_blank => true }, { :onchange => "" } %>
+    <p><%#= f.text_field :to_users, :size => 60 %></p>
+    <p><%#= f.text_field :cc_users, :size => 60 %></p>
+    <p><%#= f.text_field :bcc_users, :size => 60 %></p>
+    <p><%#= f.text_area :body, :cols => 60, :rows => 20, :required => true %></p>
   </div>
 
   <p class="buttons">

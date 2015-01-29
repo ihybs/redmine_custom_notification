@@ -5,5 +5,5 @@ class CustomNotificationTemplate < ActiveRecord::Base
   belongs_to :tracker
   serialize :field_names
 
-  # safe_attributes 'tracker_id', 'name', 'to_users', 'cc_users', 'bcc_users', 'field_names'
+  attr_accessor :selected_notification_template
 end
