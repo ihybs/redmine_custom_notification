@@ -1,5 +1,7 @@
 # coding: utf-8
 class CustomNotificationMailer < Mailer
+  layout false
+
   # Builds a mail for notifying using custom notification template
   def issue_by_template(issue, template)
     template.set_issue(issue)
