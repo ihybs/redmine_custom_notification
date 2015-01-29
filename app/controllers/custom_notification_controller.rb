@@ -3,10 +3,8 @@ class CustomNotificationController < ApplicationController
   unloadable
 
   def new
-    issue = Issue.find(params[:issue_id])
+    # issue = Issue.find(params[:issue_id])
     @notification_template = CustomNotificationTemplate.new
-    @notification_template.subject = issue.subject
-    @notification_template.body = issue.description
   end
 
   # issue.rb に send_notification メソッドがある
