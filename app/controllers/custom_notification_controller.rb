@@ -11,6 +11,7 @@ class CustomNotificationController < ApplicationController
   def select
     if params[:custom_notification_template_id].present?
       @notification_template = CustomNotificationTemplate.find(params[:custom_notification_template_id])
+      @notification_template.set_issue(@issue)
     else
       @notification_template = CustomNotificationTemplate.new
     end
