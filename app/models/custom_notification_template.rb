@@ -4,7 +4,7 @@ class CustomNotificationTemplate
   extend ActiveModel::Naming
   extend ActiveModel::Translation
 
-  attr_accessor :subject, :body, :to_users
+  attr_accessor :subject, :body, :to_users, :cc_users, :bcc_users
 
   def persisted?; false; end
 
