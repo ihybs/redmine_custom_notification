@@ -22,17 +22,20 @@ class CustomNotificationTemplate < ActiveRecord::Base
   end
 
   def available_fields
+    all_available_fields.reject {|f| (self.field_names || []).include?(f.name) }
+  end
+
+  def selected_fields
+    all_available_fields.select {|f| (self.field_names || []).include?(f.name) }
+  end
+
+  def all_available_fields
     core_notification_fields = tracker.core_fields.map {|field|
       NotificationField.new(field, l("field_#{field}".gsub("_id", "").to_sym))
     }
     custom_notification_fields = (project.all_issue_custom_fields & tracker.custom_fields).map do |field|
       NotificationField.new("cf_#{field.id}", field.name)
     end
-
     core_notification_fields + custom_notification_fields
-  end
-
-  def selected_fields
-    []
   end
 end

@@ -15,6 +15,6 @@ Redmine::Plugin.register :redmine_custom_notification do
     :public => true
 
   menu :project_menu, :custom_notification_templates,
-    { :controller => 'custom_notification_templates', :action => 'index' },
+    { :controller => 'custom_notification_templates', :action => 'index', :id => nil },
     { :caption => :custom_notification_templates, :after => :new_issue, :param => :project_id }
 end
