@@ -3,18 +3,16 @@ class CustomNotificationTemplatesController < ApplicationController
   unloadable
   before_filter :find_project
   before_filter :find_trackers
+  before_filter :build_template, :only => [:new, :create]
 
   def index
     @custom_notification_templates = CustomNotificationTemplate.all
   end
 
   def new
-    @custom_notification_template = CustomNotificationTemplate.new
   end
 
   def create
-    @custom_notification_template = CustomNotificationTemplate.new(params[:custom_notification_template])
-    @custom_notification_template.project = @project
     if @custom_notification_template.save
       flash[:notice] = l(:notice_successful_create)
       redirect_to :action => 'index', :project_id => @project
@@ -33,6 +31,16 @@ class CustomNotificationTemplatesController < ApplicationController
     end
   end
 
+  def update_form
+    if params[:id].present?
+      @custom_notification_template = CustomNotificationTemplate.find(params[:id])
+    else
+      @custom_notification_template = CustomNotificationTemplate.new
+    end
+    @custom_notification_template.project = @project
+    @custom_notification_template.tracker = Tracker.find(params[:tracker_id])
+  end
+
   def destroy
     @custom_notification_template = CustomNotificationTemplate.find(params[:id])
     @custom_notification_template.destroy
@@ -47,5 +55,11 @@ class CustomNotificationTemplatesController < ApplicationController
 
   def find_trackers
     @trackers = @project.trackers.sorted
+  end
+
+  def build_template
+    @custom_notification_template = CustomNotificationTemplate.new(params[:custom_notification_template])
+    @custom_notification_template.project = @project
+    @custom_notification_template.tracker = @project.trackers.first
   end
 end

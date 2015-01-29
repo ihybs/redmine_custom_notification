@@ -6,7 +6,7 @@
 
 <div class="contextual">
   <%= link_to l(:label_new_custom_notification_template),
-      { :controller => 'custom_notification_templates', :action => 'new', :id => @project },
+      { :controller => 'custom_notification_templates', :action => 'new', :project_id => @project },
       :class => 'icon icon-add' %>
 </div>
 
@@ -22,7 +22,7 @@
   </thead>
   <% for template in @custom_notification_templates %>
     <tr class="<%= cycle("odd", "even") %>">
-      <td class="name"><%= link_to h(template.name), { :controller => 'custom_notification_templates', :action => 'edit', :id => @project, :id => template } %></td>
+      <td class="name"><%= link_to h(template.name), { :controller => 'custom_notification_templates', :action => 'edit', :project_id => @project, :id => template } %></td>
       <td><%= template.tracker.name %></td>
       <td class="buttons">
         <%= delete_link :controller => 'custom_notification_templates', :action => 'destroy', :id => template %>
