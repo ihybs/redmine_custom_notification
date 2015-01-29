@@ -14,11 +14,27 @@ class CustomNotificationTemplate < ActiveRecord::Base
   belongs_to :tracker
   serialize :field_names
 
-  attr_accessor :selected_notification_template, :subject, :body
+  attr_accessor :selected_notification_template, :notification_field_values, :subject, :body
 
   def set_issue(issue)
     self.subject = issue.subject
-    self.body = issue.description
+
+    # Retrieve issue field values.
+    notification_field_values = {}
+    self.field_names.each do |name|
+      if m = name.match(/cf_(\d+)/)
+        cfv = issue.custom_field_values.find{|v| v.custom_field.id == m[1].to_i}
+        notification_field_values[cfv.custom_field.name] = cfv.value unless cfv.nil?
+      else
+        label = l("field_#{name}".gsub("_id", "").to_sym)
+        value = issue.read_attribute(name.to_sym) || ""
+        notification_field_values[label] = value
+      end
+    end
+    self.notification_field_values = notification_field_values
+
+    self.subject = "[Template Mail] #{issue.subject}"
+    self.body = notification_field_values.map {|k, v| "<#{k}> #{v}" }.join("\n")
   end
 
   def available_fields
