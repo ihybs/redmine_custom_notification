@@ -13,3 +13,5 @@ ja:
   field_bcc_users: "Bcc"
   field_field_names: "本文に表示するフィールド一覧"
   field_body: "本文"
+  field_header: "ヘッダ"
+  field_footer: "フッタ"

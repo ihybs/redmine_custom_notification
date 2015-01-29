@@ -5,6 +5,8 @@ class CustomNotificationMailer < Mailer
   # Builds a mail for notifying using custom notification template
   def issue_by_template(issue, template)
     template.set_issue(issue)
+    @header = template.header
+    @footer = template.footer
     @issue_field_values_by_labels = template.notification_field_values
 
     mail :to => template.to_users.split(",").map{|addr| addr.strip },

@@ -34,7 +34,7 @@ class CustomNotificationTemplate < ActiveRecord::Base
     self.notification_field_values = notification_field_values
 
     self.subject = "[Template Mail] #{issue.subject}"
-    self.body = notification_field_values.map {|k, v| "<#{k}> #{v}" }.join("\n")
+    self.body = [ self.header, "", notification_field_values.map {|k, v| "<#{k}> #{v}" }, "", self.footer ].flatten.join("\n")
   end
 
   def available_fields

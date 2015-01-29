@@ -1,7 +1,12 @@
-Your issue is here! Please update or solve the issue.
+<% if @header.present? %>
+<%= @header %>
+<% end %>
 
 <% @issue_field_values_by_labels.each do |label, value| %>
 <<%= label %>>  <%= value %>
 <% end %>
 
-Thank you for your report.
+<% if @footer.present? %>
+--
+<%= @footer %>
+<% end %>

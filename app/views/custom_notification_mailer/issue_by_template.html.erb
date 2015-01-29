@@ -1,4 +1,6 @@
-<p>Your issue is here! Please update or solve the issue.</p>
+<% if @header.present? %>
+<p><%= @header %></p>
+<% end %>
 
 <ul>
 <% @issue_field_values_by_labels.each do |label, value| %>
@@ -6,4 +8,7 @@
 <% end %>
 </ul>
 
-<p>Thank you for your report.</p>
+<% if @footer.present? %>
+<hr />
+<p><%= @footer %></p>
+<% end %>
