@@ -1,0 +1,6 @@
+ja:
+  label_new_notification: "チケットのメール通知"
+  field_to_users: "To"
+  field_cc_users: "Cc"
+  field_bcc_users: "Bcc"
+  field_body: "本文"

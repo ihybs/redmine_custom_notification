@@ -1,3 +1,5 @@
+require 'custom_notification/hooks'
+
 Redmine::Plugin.register :redmine_custom_notification do
   name 'Redmine Custom Notification plugin'
   author 'Takumi Endo'

@@ -1,0 +1,6 @@
+<%= link_to(image_tag('email.png', :plugin => 'redmine_custom_notification', :style => 'vertical-align: middle;') + ' ' + l(:field_mail_notification),
+            url_for(:controller => 'custom_notification', :action => 'new', :issue_id => @issue),
+            :remote => true,
+            :method => 'get',
+            :title => 'hoge',
+            :tabindex => 200) %>
