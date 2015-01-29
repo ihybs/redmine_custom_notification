@@ -2,13 +2,13 @@
 class CustomNotificationMailer < Mailer
   # Builds a mail for notifying using custom notification template
   def issue_by_template(issue, template)
-    @issue_field_values_by_labels = {
-      :description => issue.description
-    }
+    template.set_issue(issue)
+    @issue_field_values_by_labels = template.notification_field_values
 
     mail :to => template.to_users.split(",").map{|addr| addr.strip },
-      :cc => [],
-      :subject => "[Template Mail] #{issue.subject}"
+      :cc => template.cc_users.split(",").map{|addr| addr.strip },
+      :bcc => template.bcc_users.split(",").map{|addr| addr.strip },
+      :subject => template.subject
   end
 
   def self.deliver_issue_by_template(issue, template)
