@@ -1,6 +1,15 @@
 ja:
+  custom_notification_templates: "チケット通知テンプレート"
+  custom_notification_template: "チケット通知テンプレート"
+
+  label_custom_notification_template_plural: "チケット通知テンプレート"
+  label_custom_notification_template: "チケット通知テンプレート"
+  label_new_custom_notification_template: "新しいチケット通知テンプレート"
   label_new_notification: "チケットのメール通知"
+
+  field_selected_notification_template: "通知テンプレート選択"
   field_to_users: "To"
   field_cc_users: "Cc"
   field_bcc_users: "Bcc"
+  field_field_names: "本文に表示するフィールド一覧"
   field_body: "本文"

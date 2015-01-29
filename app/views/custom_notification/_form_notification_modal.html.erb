@@ -1,20 +1,21 @@
 <h3 class="title"><%= l(:label_new_notification) %></h3>
 
-<%= labelled_form_for @notification_template, :url => url_for(:controller => 'custom_notification', :action => 'send_mail'), :remote => true do |f| %>
-
-  <!-- TODO: use partial -->
-  <%= error_messages_for 'foo' %>
+<%= labelled_form_for @notification_template, :url => url_for(:controller => 'custom_notification', :action => 'send_mail'), :remote => true, :html => { :id => 'custom-notification-form' } do |f| %>
 
   <div class="box tabular">
-  <p><%= f.text_field :subject, :size => 60, :required => true %></p>
-  <p><%= f.text_field :to_users, :size => 60 %></p>
-  <p><%= f.text_field :cc_users, :size => 60 %></p>
-  <p><%= f.text_field :bcc_users, :size => 60 %></p>
-  <p><%= f.text_area :body, :cols => 60, :rows => 20, :required => true %></p>
+    <% select_url = url_for(:controller => 'custom_notification', :action => 'select') %>
+    <p><%= f.select :selected_notification_template, options_from_collection_for_select(@notification_templates, :id, :name, :selected => @notification_template.id),
+      { :include_blank => true }, { :onchange => "selectCustomNotificationTemplate('#{escape_javascript select_url}', this);" } %>
+    <!-- For preview --> 
+    <p><%= f.text_field :subject, :size => 60, :disabled => true %></p>
+    <p><%= f.text_field :to_users, :size => 60, :disabled => true %></p>
+    <p><%= f.text_field :cc_users, :size => 60, :disabled => true %></p>
+    <p><%= f.text_field :bcc_users, :size => 60, :disabled => true  %></p>
+    <p><%= f.text_area :body, :size => 60, :disabled => true  %></p>
   </div>
 
   <p class="buttons">
-    <%= submit_tag l(:button_create), :name => nil %>
+    <%= submit_tag l(:button_submit), :name => nil %>
     <%= submit_tag l(:button_cancel), :name => nil, :onclick => "hideModal(this);", :type => 'button' %>
   </p>
 <% end %>

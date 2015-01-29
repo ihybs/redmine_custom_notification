@@ -1,0 +1,32 @@
+<% if @project.trackers.blank? %>
+  <div class="nodata">
+    <%= simple_format(l(:text_no_tracker_enabled)) %>
+  </div>
+<% end %>
+
+<div class="contextual">
+  <%= link_to l(:label_new_custom_notification_template),
+      { :controller => 'custom_notification_templates', :action => 'new', :project_id => @project },
+      :class => 'icon icon-add' %>
+</div>
+
+<h2><%= l(:label_custom_notification_template_plural) %></h2>
+
+<table class="list">
+  <thead>
+    <tr>
+      <th><%= l(:label_custom_notification_template) %></th>
+      <th><%= l(:label_tracker) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <% for template in @custom_notification_templates %>
+    <tr class="<%= cycle("odd", "even") %>">
+      <td class="name"><%= link_to h(template.name), { :controller => 'custom_notification_templates', :action => 'edit', :project_id => @project, :id => template } %></td>
+      <td><%= template.tracker.name %></td>
+      <td class="buttons">
+        <%= delete_link :controller => 'custom_notification_templates', :action => 'destroy', :id => template %>
+      </td>
+    </tr>
+  <% end %>
+</table>

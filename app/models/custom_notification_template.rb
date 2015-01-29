@@ -1,26 +1,41 @@
-class CustomNotificationTemplate
-  include ActiveModel::Conversion
-  include ActiveModel::Validations
-  extend ActiveModel::Naming
-  extend ActiveModel::Translation
+class NotificationField
+  attr_accessor :name, :label
 
-  attr_accessor :subject, :body, :to_users, :cc_users, :bcc_users
+  def initialize(name, label, options = {})
+    self.name = name
+    self.label = label
+  end
+end
 
-  def persisted?; false; end
+class CustomNotificationTemplate < ActiveRecord::Base
+  include Redmine::SafeAttributes
+  unloadable
+  belongs_to :project
+  belongs_to :tracker
+  serialize :field_names
 
-  def initialize(attributes = {})
-    self.attributes = attributes
+  attr_accessor :selected_notification_template, :subject, :body
+
+  def set_issue(issue)
+    self.subject = issue.subject
+    self.body = issue.description
   end
 
-  def attributes=(attributes = {})
-    if attributes
-      attributes.each do |name, value|
-        send "#{name}=", value
-      end
+  def available_fields
+    all_available_fields.reject {|f| (self.field_names || []).include?(f.name) }
+  end
+
+  def selected_fields
+    all_available_fields.select {|f| (self.field_names || []).include?(f.name) }
+  end
+
+  def all_available_fields
+    core_notification_fields = tracker.core_fields.map {|field|
+      NotificationField.new(field, l("field_#{field}".gsub("_id", "").to_sym))
+    }
+    custom_notification_fields = (project.all_issue_custom_fields & tracker.custom_fields).map do |field|
+      NotificationField.new("cf_#{field.id}", field.name)
     end
-  end
-
-  def attributes
-    Hash[instance_variable_names.map{|v| [v[1..-1], instance_variable_get(v)]}]
+    core_notification_fields + custom_notification_fields
   end
 end

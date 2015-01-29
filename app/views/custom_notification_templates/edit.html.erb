@@ -1,0 +1,22 @@
+<%= title [l(:label_custom_notification_template_plural), { :controller => 'custom_notification_templates', :action => 'index', :project_id => @project, :id => nil }],
+          @custom_notification_template.name %>
+
+<script type="text/javascript">
+  <% url = url_for(:controller => 'custom_notification_templates', :action => 'update_form', :project_id => @project, :id => @custom_notification_template) %>
+  function updateForm(obj) {
+    $.ajax({
+      url: '<%= escape_javascript url %>',
+      type: 'get',
+      data: { tracker_id: $(obj).val() }
+    });
+  }
+</script>
+
+<%= labelled_form_for @custom_notification_template,
+  :url => { :controller => 'custom_notification_templates', :action => 'update', :project_id => @project },
+  :html => { :id => 'custom-notification-template-form' } do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit l(:button_change) %>
+  </p>
+<% end %>
