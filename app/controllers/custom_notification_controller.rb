@@ -2,10 +2,10 @@
 class CustomNotificationController < ApplicationController
   unloadable
   before_filter :find_issue
+  before_filter :find_templates, :only => [:new, :select]
 
   def new
     @notification_template = CustomNotificationTemplate.new
-    @notification_templates = CustomNotificationTemplate.all
   end
 
   def select
@@ -15,7 +15,6 @@ class CustomNotificationController < ApplicationController
     else
       @notification_template = CustomNotificationTemplate.new
     end
-    @notification_templates = CustomNotificationTemplate.all
   end
 
   def send_mail
@@ -27,5 +26,10 @@ class CustomNotificationController < ApplicationController
 
   def find_issue
     @issue = Issue.find(params[:issue_id])
+  end
+
+  def find_templates
+    @notification_templates = CustomNotificationTemplate.where('project_id = ? AND tracker_id = ?',
+                                                               @issue.project.id, @issue.tracker.id).order('name')
   end
 end
