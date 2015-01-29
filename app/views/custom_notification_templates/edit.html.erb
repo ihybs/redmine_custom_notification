@@ -13,7 +13,8 @@
 </script>
 
 <%= labelled_form_for @custom_notification_template,
-  :url => { :controller => 'custom_notification_templates', :action => 'update', :project_id => @project } do |f| %>
+  :url => { :controller => 'custom_notification_templates', :action => 'update', :project_id => @project },
+  :html => { :id => 'custom-notification-template-form' } do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>
   <p>
     <%= f.submit l(:button_change) %>

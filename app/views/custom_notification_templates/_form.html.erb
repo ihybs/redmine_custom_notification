@@ -1,3 +1,11 @@
+<!-- FIXME: move to assets/javascripts -->
+<script type="text/javascript">
+  $("#custom-notification-template-form").submit(function() {
+      $("#selected_columns").children('option').attr('selected', true);
+      return true;
+  });
+</script>
+
 <%= error_messages_for @custom_notification_template %>
 <div class="box tabular">
   <p><%= f.select :tracker_id, options_from_collection_for_select(@trackers, :id, :name, :selected => @custom_notification_template.try(:tracker).try(:id)), {}, { :onchange => "updateForm(this);" } %>
