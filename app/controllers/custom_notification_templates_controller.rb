@@ -30,6 +30,7 @@ class CustomNotificationTemplatesController < ApplicationController
     end
   end
 
+  # Update available/selectable field names (called by Ajax).
   def update_form
     if params[:id].present?
       @custom_notification_template = CustomNotificationTemplate.find(params[:id])

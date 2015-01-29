@@ -8,6 +8,7 @@ class CustomNotificationController < ApplicationController
     @notification_template = CustomNotificationTemplate.new
   end
 
+  # Refresh template's preview values when user selects it. (called by Ajax)
   def select
     if params[:custom_notification_template_id].present?
       @notification_template = CustomNotificationTemplate.find(params[:custom_notification_template_id])
