@@ -1,0 +1,8 @@
+<%= error_messages_for @custom_notification_template %>
+<div class="box tabular">
+  <p><%= f.select :tracker_id, options_from_collection_for_select(@trackers, :id, :name, :selected => @custom_notification_template.try(:tracker).try(:id)) %>
+  <p><%= f.text_field :name, :size => 60, :required => true %></p>
+  <p><%= f.text_field :to_users, :size => 60 %></p>
+  <p><%= f.text_field :cc_users, :size => 60 %></p>
+  <p><%= f.text_field :bcc_users, :size => 60 %></p>
+</div>

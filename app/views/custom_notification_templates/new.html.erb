@@ -1,0 +1,10 @@
+<%= title [l(:label_custom_notification_template_plural), { :controller => 'custom_notification_templates', :action => 'index', :project_id => @project }],
+          l(:label_new_custom_notification_template) %>
+
+<%= labelled_form_for @custom_notification_template,
+  :url => { :controller => 'custom_notification_templates', :action => 'create', :project_id => @project } do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit l(:button_create) %>
+  </p>
+<% end %>
