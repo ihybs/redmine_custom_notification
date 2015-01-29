@@ -1,8 +1,9 @@
 # coding: utf-8
 class CustomNotificationTemplatesController < ApplicationController
   unloadable
+  before_filter :require_login
   before_filter :find_project
-  before_filter :find_trackers
+  before_filter :find_trackers, :except => [:index, :destroy]
   before_filter :find_template, :only => [:edit, :update, :destroy]
   before_filter :build_template, :only => [:new, :create]
 
@@ -26,7 +27,9 @@ class CustomNotificationTemplatesController < ApplicationController
   def update
     if @custom_notification_template.update_attributes(params[:custom_notification_template])
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :action => 'index', :project_id => @project
+      redirect_to :action => 'index', :project_id => @project, :id => nil
+    else
+      render :edit
     end
   end
 
@@ -43,7 +46,7 @@ class CustomNotificationTemplatesController < ApplicationController
 
   def destroy
     @custom_notification_template.destroy
-    redirect_to :action => 'index', :project_id => @project
+    redirect_to :action => 'index', :project_id => @project, :id => nil
   end
 
   private

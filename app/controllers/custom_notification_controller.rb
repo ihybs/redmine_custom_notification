@@ -1,6 +1,7 @@
 # coding: utf-8
 class CustomNotificationController < ApplicationController
   unloadable
+  before_filter :require_login
   before_filter :find_issue
   before_filter :find_templates, :only => [:new, :select]
 
