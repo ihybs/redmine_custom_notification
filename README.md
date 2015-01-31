@@ -2,6 +2,8 @@
 
 Plugin to send an email using user-specified issue's field values.  
 
+Japanese version is [here](/README.ja.md)
+
 ## Plugin installation
 
 1. Download the plugin (use git clone or download the ZIP file) and copy into your Redmine plugins directory (e.g.   ``/path/to/redmine/plugins`` )
