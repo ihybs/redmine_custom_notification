@@ -2,7 +2,7 @@
 class CustomNotificationTemplatesController < ApplicationController
   unloadable
   before_filter :require_login
-  before_filter :find_project
+  before_filter :find_project, :authorize
   before_filter :find_trackers, :except => [:index, :destroy]
   before_filter :find_template, :only => [:edit, :update, :destroy]
   before_filter :build_template, :only => [:new, :create]
