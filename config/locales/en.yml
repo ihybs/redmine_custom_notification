@@ -1,3 +1,21 @@
-# English strings go here for Rails i18n
 en:
-  # my_label: "My label"
+  custom_notification_templates: "Issue Notification Templates"
+  custom_notification_template: "Issue Notification Templates"
+
+  label_custom_notification_template_plural: "Issue Notification Templates"
+  label_custom_notification_template: "Issue notification template"
+  label_new_custom_notification_template: "New issue notification template"
+  label_new_notification: "Send email"
+
+  project_module_custom_notification: "Custom issue notification"
+  permission_manage_custom_notification_templates: "Manage issue notification templates"
+  permission_send_notification: "Send issue notificatios"
+
+  field_selected_notification_template: "Select issue notification template"
+  field_to_users: "To"
+  field_cc_users: "Cc"
+  field_bcc_users: "Bcc"
+  field_field_names: "fields for body"
+  field_body: "body"
+  field_header: "header"
+  field_footer: "footer"
