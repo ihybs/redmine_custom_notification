@@ -14,7 +14,7 @@ See also http://www.redmine.org/projects/redmine/wiki/Plugins
 
 ## Usage
 
-1. Go to the project's settings page and click on the Modules tab, so enable "Custom notification" module.
+1. Go to the project's settings page and click on the Modules tab, then enable "Custom notification" module.
 2. If "Custom notification" module is enabled, a project menu named "Custom Notification Templates" is shown, click the menu.
 3. Create a new custom notification template.
 4. Go to an issue page, click the "Email notification".
