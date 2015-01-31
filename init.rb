@@ -10,9 +10,14 @@ Redmine::Plugin.register :redmine_custom_notification do
 
   requires_redmine :version_or_higher => '2.4.0'
 
-  permission :custom_notification_templates,
-    { :custom_notification_templates => [:index, :new, :create, :edit, :update, :destroy] },
-    :public => true
+  project_module :custom_notification do
+    permission :manage_custom_notification_templates,
+      { :custom_notification_templates => [:index, :new, :create, :edit, :update, :destroy] },
+      :require => :member
+    permission :send_notification,
+      { :custom_notification => [:new, :select, :send_mail] },
+      :require => :member
+  end
 
   menu :project_menu, :custom_notification_templates,
     { :controller => 'custom_notification_templates', :action => 'index', :id => nil },

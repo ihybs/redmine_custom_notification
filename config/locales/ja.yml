@@ -7,6 +7,10 @@ ja:
   label_new_custom_notification_template: "新しいチケット通知テンプレート"
   label_new_notification: "チケットのメール通知"
 
+  project_module_custom_notification: "チケット通知"
+  permission_manage_custom_notification_templates: "通知テンプレートの管理"
+  permission_send_notification: "通知テンプレートを使ったメール送信"
+
   field_selected_notification_template: "通知テンプレート選択"
   field_to_users: "To"
   field_cc_users: "Cc"
